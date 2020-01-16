@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnAReplyMapper">
+	<!-- 덧글쓰기 -->
+	<insert id="answertext">
+		insert into tbl_qnareply(QnAno, uno,unick, QnAcontent)
+		values (#{QnAno}, #{uno} , #{unick}, #{QnAcontent})
+	</insert>
+	<!-- 덧글읽기 -->
+	<select id="relist" resultType="com.ex.domain.QnAReplyVO">
+		select * from tbl_qnareply where QnAno=#{QnAno}
+	</select>
+	<!-- 덧글지우기 -->
+	<delete id="answerdelete">
+		delete from tbl_qnareply where QnAreno=#{QnAreno}
+	</delete>
+
+</mapper>

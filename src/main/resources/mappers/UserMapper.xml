@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+
+	<!-- 유저관리list select -->
+	<select id="userlistread" resultType="com.ex.domain.UserVO">
+		select * from tbl_user
+		where uauth = 0 or uauth = 2
+		order by uno desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+	
+	<select id="suserlistread" resultType="com.ex.domain.UserVO">
+		select * from tbl_user
+		<if test="searchType=='uno'">
+			where uno like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='unick'">
+			where unick like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='ulock'">
+			where ulock like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='uauth'">
+			where uauth like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		order by uno desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+
+	<!-- 유저리 list 관리자를 제외한 토탈값 -->
+	<select id="total" resultType="int">
+		select count(*)
+		from tbl_user
+		where uauth = 0 or uauth = 2
+	</select>
+	<!-- 검색 결과 토탈 값 -->
+	<select id="stotal" resultType="int">
+		select count(*) from tbl_user
+		<if test="searchType=='uno'">
+			where uno like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='unick'">
+			where unick like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='ulock'">
+			where ulock like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+		<if test="searchType=='uauth'">
+			where uauth like concat('%', #{keyword}, '%')
+			AND uauth = 0 or uauth = 2
+		</if>
+
+	</select>
+
+	<!-- 로그인한 해당 유저의 전체 user정보를 select -->
+	<select id="login" resultType="com.ex.domain.UserVO">
+		select * from tbl_user where uemail=#{uemail} AND #{udelete} != 1
+	</select>
+
+	<!--vo값을 받아오기위한 uemail select -->
+	<select id="selectuser" resultType="String">
+		select uemail from tbl_user where uemail=#{uemail} AND #{udelete} != 1
+	</select>
+
+	<!--네아로 로그인성공 후 uservo에 저장 -->
+	<insert id="userinsert">
+		insert into tbl_user(uno,uemail, unick)
+		values(#{uno},#{uemail}, #{unick})
+	</insert>
+
+	<!--mypage에서 정보를 가져온다 -->
+	<select id="myread" resultType="com.ex.domain.UserVO">
+		select * from tbl_user where uemail=#{uemail} AND #{udelete} != 1
+	</select>
+
+	<!--mypage에서 my프로필 수정 -->
+	<update id="myupdate">
+		UPDATE TBL_USER SET unick=#{unick},uint=#{uint},
+		profileimage=#{profileimage} where uemail=#{uemail}
+	</update>
+	<!-- ulock 버튼을 누를시 경고횟수가 1회 늘어남 -->
+	<update id="userlock">
+		update tbl_user set ulock = ulock+1
+		where uno=#{uno} and ulock != 3
+	</update>
+	<!--블랙리스트 등록 (블랙리스트 등록 시 댓글쓰기 및 게시글 쓰기 및 본인 게시글 수정이 안되도록 해야함 -->
+	<update id="blacklist">
+		update tbl_user set uauth=2 where uno=#{uno}
+	</update>
+	<!--블랙리스트에서 해방 함 or 일반 유저 경고횟수 -1 -->
+	<update id="unblack">
+		update tbl_user set uauth=0 , ulock = 2 where uno=#{uno}
+	</update>
+
+	<!--회원 탈퇴 시 권한을 변경 다른 맵퍼에도 권한들을 추가해줘야함 또한 회원 탈퇴 시 자기가 작성했던 게시글도 bedlete=1로 
+		가야함 , 탈퇴 후 로그인 시 계정탈퇴한 유저입니다라고 뜨고 read만 가능하게해야함 -->
+	<update id="udelete">
+		update tbl_user set udelete=1 where uno=#{uno}
+	</update>
+
+
+	<!--관리자 유저관리 list 검색기능 -->
+
+
+
+</mapper>

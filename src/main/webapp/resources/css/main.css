@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+@font-face {
+	font-family: 'DOSGothic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#search-key {
+	height: 40px;
+	font-size: 18px;
+	width: 400px;
+	border: 0;
+}
+
+#search-btn {
+	height: 40px;
+	border: 0px;
+	top: 0;
+	left: 0;
+	background-color: #FFEFD5;
+	color: black;
+	font-weight: bold;
+}
+
+#main-best-title {
+	font-family: 'Gill Sans';
+	font-size: 32px;
+	font-weight: bold;
+	text-align: center;
+	border-top: 3px double #228B22;
+	border-bottom: 3px double #228B22;
+}
+
+.main-best-item {
+	width: 420px;
+	height: 300px;
+	margin: auto;
+	float: left;
+}
+
+.main-best-item-text {
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 420px;
+	overflow: hidden;
+	font-size: 32px;
+	font-family: 궁서체;
+	color: white;
+}
+
+#body-field {
+	margin: 0;
+	margin-left: 240px;
+	padding: 10px;
+	overflow-y: auto;
+	overflow: scroll;
+}
+
+#head-title {
+	height: 80px;
+	font-size: 48px;
+	font-weight: bold;
+	color: #FFA07A;
+	text-align: center;
+	padding-bottom: 16px;
+	vertical-align: center;
+	background-color: #3CB371;
+}
+
+#head-move, #head-search {
+	height: 59px;
+	text-align: center;
+	margin: 10px 0px 10px 0px;
+	background-color: #2F4F4F;
+	padding: 10px;
+}
+
+#head-move a {
+	text-decoration: none;
+	font-size: 26px;
+	padding: 10px;
+	color: #F0FFFF;
+	border: 1px solid white;
+	font-family: 'Gill Sans';
+}
+
+#head-move a:hover {
+	color: #FFB6C1;
+}
+
+@font-face {
+	font-family: 'DOSGothic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.body-table {
+	border: 3px solid #00008B;
+	border-collapse: collapse;
+}
+
+.body-table th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.active {
+	color: red;
+}
+
+#pagination{
+	text-decoration: none;
+	font-size: 22px;
+	font-family: 'DOSGothic';
+}

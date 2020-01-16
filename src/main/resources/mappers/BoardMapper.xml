@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+	<!--베스트 리스트 좋아요순으로 3개 -->
+	<select id="best" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board order by
+		blike desc limit 0, 3
+	</select>
+
+	<!--전체리스트 최신순 -->
+	<select id="list" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board order by
+		bno desc limit 0, 10
+	</select>
+
+
+	<!-- navbar에서 선택 페이지 list <select id="korean" resultType="com.ex.domain.BoardVO"> 
+		select * from tbl_board where bnational = #{bnational} order by bno desc 
+		</select> -->
+
+	<!-- 선택한 글 불러오기 -->
+	<select id="read" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where
+		bno =
+		#{bno}
+	</select>
+
+	<delete id="delete">
+		delete from tbl_board where bno = #{bno};
+	</delete>
+
+	<!--게시판 글쓰기 -->
+	<insert id="writer">
+		INSERT INTO TBL_BOARD(uno, unick, btitle,
+		bingredient, bnational, btime,
+		bsort, bcontent, thumbnail)
+		VALUES(#{uno}, #{unick},
+		#{btitle}, #{bingredient}, #{bnational},
+		#{btime},
+		#{bsort},
+		#{bcontent}, #{thumbnail})
+	</insert>
+
+	<!-- mypost 리스트 -->
+	<select id="userList" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where
+		uno=#{uno} order by bno desc
+	</select>
+
+	<!--카테고리 리스트(국가별) -->
+	<select id="national" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where bnational = #{bnational}
+		<if test="orderType=='blike'">
+			order by blike desc
+		</if>
+		<if test="orderType=='bwdate'">
+			order by bwdate desc
+		</if>
+
+		limit #{cri.pageStart},#{cri.perPageNum}
+	</select>
+
+
+	<select id="time" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where btime = #{btime}
+		<if test="orderType=='blike'">
+			order by blike desc
+		</if>
+		<if test="orderType=='bwdate'">
+			order by bwdate desc
+		</if>
+
+		limit
+		#{cri.pageStart},#{cri.perPageNum}
+		<!-- <if test="btime=='q-hour'"> where btime = q-hour order by bno desc 
+			</if> <if test="btime=='h-hour'"> where btime = h-hour order by bno desc 
+			</if> <if test="btime=='o-hour'"> where btime = o-hour order by bno desc 
+			</if> <if test="btime=='over'"> where btime = over order by bno desc </if> -->
+	</select>
+
+
+	<select id="sort" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where bsort=#{bsort}
+
+		<if test="orderType=='blike'">
+			order by blike desc
+		</if>
+		<if test="orderType=='bwdate'">
+			order by bwdate desc
+		</if>
+		limit
+		#{cri.pageStart},#{cri.perPageNum}
+		<!-- <if test="bsort=='solo'"> where bsort = solo order by bno desc </if> 
+			<if test="bsort=='family'"> where bsort = family order by bno desc </if> 
+			<if test="bsort=='dessert'"> where bsort = dessert order by bno desc </if> 
+			<if test="bsort=='healthy'"> where bsort = healthy order by bno desc </if> 
+			<if test="bsort=='etc'"> where bsort = etc order by bno desc </if> -->
+	</select>
+	<!-- 검색 -->
+	<select id="search" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board
+		where
+		btitle like CONCAT('%', #{keyword}, '%') OR bingredient like
+		CONCAT('%', #{keyword}, '%')
+		order by bwdate desc
+		limit #{pageStart},
+		#{perPageNum}
+	</select>
+	<!-- 검색 토탈 -->
+	<select id="total" resultType="int">
+		select count(*) from tbl_board
+		where btitle like CONCAT('%', #{keyword}, '%') OR bingredient like
+		CONCAT('%', #{keyword}, '%')
+	</select>
+
+	<select id="ctotal" resultType="int">
+		select count(*) from tbl_board
+		where bnational = #{bnational}
+	</select>
+
+	<select id="stotal" resultType="int">
+		select count(*) from tbl_board
+		where bsort = #{bsort}
+	</select>
+
+	<select id="ttotal" resultType="int">
+		select count(*) from tbl_board
+		where btime = #{btime}
+	</select>
+
+	<select id="mypostread" resultType="com.ex.domain.BoardVO">
+		select * from tbl_board where
+		bno=#{bno}
+
+	</select>
+
+	<update id="mypostupdate">
+		update tbl_board
+		set btitle=#{btitle},
+		bingredient=#{bingredient}, bnational=#{bnational},
+		btime=#{btime},
+		bsort=#{bsort}, bcontent=#{bcontent},
+		thumbnail=#{thumbnail}
+		where
+		bno=#{bno} and uno=#{uno}
+	</update>
+
+	<!-- blikeUp -->
+	<update id="blikeUp">
+		update tbl_board set blike=blike+1 where bno=#{bno}
+	</update>
+
+	<!-- blikeDown -->
+	<update id="blikeDown">
+		update tbl_board set blike=blike-1 where bno=#{bno}
+	</update>
+
+</mapper>

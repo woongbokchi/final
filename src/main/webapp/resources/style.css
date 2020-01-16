@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+#center {
+   padding: 10px;
+   text-align: center;
+   color: #FFBA5A;
+   font-size: 42px;
+}
+
+#container {
+   margin: 0px auto;
+   width: 1200px;
+   background: #042F4B;
+}
+
+#box {
+   width: 300px;
+   margin: 10px;
+   float: left;
+   text-align: center;
+   background: #orange;
+   border: 5px solid;
+   padding: 10px;
+}
+
+#text-box {
+   float: center;
+   padding: 50px;
+   margin: 50px;
+   text-align: center;
+}
+
+#click-box {
+   text-align: center;
+   padding: 50px;
+   margin: auto;
+}
+
+#boardtext {
+   color: #FFBA5A;
+}
