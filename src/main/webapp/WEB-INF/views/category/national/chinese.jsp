@@ -13,7 +13,7 @@
 <body>
    <jsp:include page="../../navbar.jsp"></jsp:include>
    <div id="body-field">
-      <div id="head-title">National - Chinese</div>
+      <img src="resources/image/head-title/chinese.jpg" style = "margin:auto; width:1625px; height:120px;">
       <div id="head-move">
          <a href="korean">Korean</a>
          <a href="western">Western</a>
@@ -33,7 +33,7 @@
         <div style="width:1300px; margin:0px auto;">
             <table class="body-table" style="width:1200px; margin:10px auto; background-color:white;">
                <tr height=40px>
-                  <td rowspan=3 width=400px><img src = display?fileName={{thumbnail}} style="margin:10px; width:320px; height:320px;" onClick = "location.href = 'read?bno={{bno}}'"></td>
+                  <td rowspan=3 width=400px><img src = display?fileName={{thumbnail}} style="margin:10px; width:320px; height:180px;" onClick = "location.href = 'read?bno={{bno}}'"></td>
                   <th colspan=3 width=680px>{{btitle}}</th>
                </tr>
                <tr height=20px;>

@@ -88,7 +88,7 @@
 <body>
 	<jsp:include page="../navbar.jsp" />
 	<div id="body-content">
-		<div id="head-title">문의 게시글 읽기</div>
+		<img src="resources/image/head-title/QnARead.jpg" style = "margin:auto; width:1625px; height:120px;">
 		<div id="board-body">
 			<form name="frm" action="helpWritePost" method="post" enctype="multipart/form-data">
 				<table border='3px solid black' width=1300px style="margin:auto; background-color:white">

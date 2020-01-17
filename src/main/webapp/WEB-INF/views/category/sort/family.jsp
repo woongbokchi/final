@@ -13,7 +13,7 @@
 <body>
    <jsp:include page="../../navbar.jsp"></jsp:include>
    <div id="body-field">
-      <div id="head-title">Sort - family</div>
+      <img src="resources/image/head-title/family.jpg" style = "margin:auto; width:1625px; height:120px;">
       <div id="head-move">
          <a href="solo">Solo</a>
          <a href="family">Family</a>

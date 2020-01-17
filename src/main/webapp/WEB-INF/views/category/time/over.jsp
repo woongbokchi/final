@@ -13,7 +13,7 @@
 <body>
    <jsp:include page="../../navbar.jsp"></jsp:include>
    <div id="body-field">
-      <div id="head-title">Time - Over</div>
+      <img src="resources/image/head-title/over.jpg" style = "margin:auto; width:1625px; height:120px;">
       <div id="head-move">
          <a href="q-hour">15min</a>
          <a href="h-hour">30min</a>

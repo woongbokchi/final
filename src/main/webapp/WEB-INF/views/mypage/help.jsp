@@ -13,9 +13,16 @@
 	<jsp:include page="../navbar.jsp"></jsp:include>
 	<form action="">
 		<div id="body-content">
-			<div id="head-title">My Page</div>
+			<img src="resources/image/head-title/mypage3.jpg" style = "margin:auto; width:1625px; height:120px;">
 			<div id="head-move">
-				<a href="myPage">My Profile</a> <a href="myPost">My Post</a> <a href="help">My QnA</a>
+				<c:if test="${vo.uauth!=2}">
+					<a href="myPage">My Profile</a>
+					<a href="myPost">My Post</a>
+					<a href="help">My QnA</a>
+				</c:if>
+				<c:if test="${vo.uauth==2}">
+					<a href="help">My QnA</a>
+				</c:if>
 			</div>
 			<div id="post-body">
 				<div style="text-align: center;">
@@ -49,44 +56,44 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script>
 	var page = 1;
-	
+
 	getqlist();
-	
-	$("#pagination").on("click", "a", function(event){
-        event.preventDefault();
-        page = $(this).attr("href");
-        getqlist();
-     });
+
+	$("#pagination").on("click", "a", function(event) {
+		event.preventDefault();
+		page = $(this).attr("href");
+		getqlist();
+	});
 
 	function getqlist() {
 		$.ajax({
 			type : "get",
 			url : "help.json",
-			data : {"page" : page},
+			data : {
+				"page" : page
+			},
 			success : function(data) {
 				//alert("??????????");
 				var temp = Handlebars.compile($("#temp").html());
 				$("#helptbl").html(temp(data));
-				
- 				var str = "";
-                 
-                if(data.pm.prev){
-                   str += "<a href='" + (data.pm.startPage-1) + "'>◁</a>";
-                }
-                 
-                for(var i = data.pm.startPage; i <= data.pm.endPage; i++){       
-                   str += "<a href='" + i + "'>[" + i + "]</a>";       
-                }
-                 
-                if(data.pm.next){
-                   str += "<a href='" + (data.pm.endPage+1) + "'>▷</a>";
-                }
-                 
-                $("#pagination").html(str);
+
+				var str = "";
+
+				if (data.pm.prev) {
+					str += "<a href='" + (data.pm.startPage - 1) + "'>◁</a>";
+				}
+
+				for (var i = data.pm.startPage; i <= data.pm.endPage; i++) {
+					str += "<a href='" + i + "'>[" + i + "]</a>";
+				}
+
+				if (data.pm.next) {
+					str += "<a href='" + (data.pm.endPage + 1) + "'>▷</a>";
+				}
+
+				$("#pagination").html(str);
 			}
 		});
 	}
-	
-	
 </script>
 </html>

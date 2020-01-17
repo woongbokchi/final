@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="../navbar.jsp"></jsp:include>
 	<div id="body-content">
-		<div id="head-title">My Page</div>
+		<img src="resources/image/head-title/mypage3.jpg" style = "margin:auto; width:1625px; height:120px;">
 		<div id="head-move">
 			<a href="myPage">My Profile</a>
 			<a href="myPost">My Post</a>

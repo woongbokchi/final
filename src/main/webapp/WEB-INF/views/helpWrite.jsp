@@ -65,7 +65,7 @@
    <jsp:include page="navbar.jsp"/>
    
    <div	id="body-content" style="position: relative; overflow-y: auto;"> 
-      <div id="head-title">문의 게시글 쓰기</div>
+      <img src="resources/image/head-title/QnAWrite.jpg" style = "margin:auto; width:1625px; height:120px;">
 		<div id="board-body" style="background-color: #DCDCDC; padding: 20px">
 			<form name="frm" action="helpWritePost" method="post" enctype="multipart/form-data">
 				<table border='3px solid black' width=1300px

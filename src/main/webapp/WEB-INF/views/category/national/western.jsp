@@ -13,7 +13,7 @@
 <body>
    <jsp:include page="../../navbar.jsp"></jsp:include>
    <div id="body-field">
-      <div id="head-title">National - Other</div>
+      <img src="resources/image/head-title/western.jpg" style = "margin:auto; width:1625px; height:120px;">
       <div id="head-move">
          <a href="korean">Korean</a>
          <a href="western">Western</a>
